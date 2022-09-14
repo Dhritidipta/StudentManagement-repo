@@ -1,0 +1,85 @@
+﻿@model StudentManagement.WebApp.Models.StudentCreate
+@{
+    ViewBag.Title = "Create Student Page";
+}
+
+<style>
+    #wrap-form{
+        width: 50%;
+        background-color: aqua;
+    }
+    #btn-wrap {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        #btn-wrap > div {
+            display: inline-block;
+        }
+</style>
+
+<div id="wrap-form">
+    <form asp-action="Create" method="post" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="LastName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Gender" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Fees" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Fees" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Age" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Age" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CourseName" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="CourseName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Section" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Section" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DateOfAdmission" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="DateOfAdmission" class="form-control" />
+            </div>
+        </div>
+
+        <div id="btn-wrap">
+            <div id="cancel-btn">
+                <a asp-action="Index" role="button" class="btn btn-primary">Cancel</a>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" class="btn btn-primary" value="Add" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

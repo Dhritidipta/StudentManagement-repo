@@ -35,12 +35,32 @@ namespace StudentManagement.WebApp.Controllers
 
         public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(StudentCreate student)
+        {
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUrl);
+
+                var stringContent = new StringContent(JsonConvert.SerializeObject(student), System.Text.Encoding.UTF8, "application/json");
+                var postTask = client.PostAsync("students", stringContent);
+                postTask.Wait();
+
+                var result = postTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
-                return View();
+            ModelState.AddModelError(string.Empty, "Server Error.");
+
+            return View(student);
         }
     }
 }
