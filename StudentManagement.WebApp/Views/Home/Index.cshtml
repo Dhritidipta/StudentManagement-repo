@@ -41,7 +41,7 @@
                 {
                     <tr>
                         <th scope="row">@student.Id</th>
-                        <td>@student.Name</td>
+                        <td><a asp-action="Details" asp-route-id="@student.Id" class="btn btn-link btn-sm">@student.Name</a></td>
                         <td>@student.Section</td>
                         <td>@student.Gender</td>
                         <td>@student.CourseName</td>

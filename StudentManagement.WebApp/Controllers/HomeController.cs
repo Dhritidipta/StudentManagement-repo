@@ -10,6 +10,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AutoMapper;
 
 namespace StudentManagement.WebApp.Controllers
 {
@@ -32,7 +33,26 @@ namespace StudentManagement.WebApp.Controllers
             }
             
             return View(students);
-        } 
+        }
+        
+        public IActionResult Details(int id)
+        {
+
+            Student student = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                var response = client.GetAsync($"students/{id}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    student = JsonConvert.DeserializeObject<Student>(response.Content.ReadAsStringAsync().Result);
+                }
+            }
+
+
+            return View(student);
+        }
 
         public IActionResult Create()
         {

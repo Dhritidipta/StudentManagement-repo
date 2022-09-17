@@ -1,4 +1,9 @@
-﻿#back-btn {
+﻿.rightsided-btn {
+    margin-left: 70%;
+    margin-bottom: 8px;
+}
+
+#back-btn {
     margin-left: 70%;
     margin-bottom: 8px;
 }
