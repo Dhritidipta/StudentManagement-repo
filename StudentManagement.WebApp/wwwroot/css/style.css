@@ -12,8 +12,14 @@
     text-align: center;
 }
 
+#add-btn > a {
+    padding: 3px 20px;
+}
+
 #add-btn {
+    float: right;
     text-align: end;
+    margin-bottom: 10px;
 }
 
 label {

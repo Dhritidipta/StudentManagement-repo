@@ -1,11 +1,12 @@
 ﻿@model StudentManagement.WebApp.Models.StudentUpdate
 @{
-    ViewBag.Title = "Edit Student Page";
+    ViewBag.Title = "Edit";
 }
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
+
 <div id="back-btn">
     <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-primary">&lt;&lt; Back to home</a>
 </div>

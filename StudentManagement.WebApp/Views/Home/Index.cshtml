@@ -4,23 +4,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    *{
-        font-family:"Roboto", sans-serif;
-    }
-
-    #add-btn{
-        float: right;
-    }
-    #add-btn > a{
-        padding: 3px 20px;
-    }
-</style>
-
 <div class="container">
     <div id="add-btn">
         <a asp-controller="Home" asp-action="Create" role="button" class="btn btn-primary">Add Student</a>
     </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
