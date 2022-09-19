@@ -20,7 +20,7 @@
             <a asp-action="Edit" asp-route-id="@Model.Id" role="button" class="btn btn-primary">Edit</a>
         </div>
     </div>
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <td>First Name</td>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>Date of Admission</td>
-                <td>@Model.DateOfAdmission</td>
+                <td>@Model.DateOfAdmission.ToString("dd/MM/yyyy")</td>
             </tr>
 
             @*<tr>

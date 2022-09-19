@@ -21,7 +21,7 @@
     <div id="add-btn">
         <a asp-controller="Home" asp-action="Create" role="button" class="btn btn-primary">Add Student</a>
     </div>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">#id</th>
@@ -45,7 +45,7 @@
                         <td>@student.Section</td>
                         <td>@student.Gender</td>
                         <td>@student.CourseName</td>
-                        <td>@student.DateOfAdmission</td>
+                        <td>@student.DateOfAdmission.ToString("dd/MM/yyyy")</td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-success btn-sm text-white">Edit</a>
                             <a asp-action="Delete" asp-route-id="@student.Id" asp- class="btn btn-danger btn-sm text-white" onclick="return confirm('Are you sure you want to delete?')">Delete</a>

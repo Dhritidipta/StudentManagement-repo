@@ -125,12 +125,24 @@ namespace StudentManagement.WebApp.Controllers
                 sections.Add(new SelectListItem { Value = item, Text = item });
             }
 
+
+            Student student = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                var response = client.GetAsync($"students/{id}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    student = JsonConvert.DeserializeObject<Student>(response.Content.ReadAsStringAsync().Result);
+                }
+            }
             //assigning SelectListItem to view Bag
             ViewBag.courses = courses;
             ViewBag.sections = sections;
 
             ViewBag.id = id;
-
+            ViewBag.student = student;
             return View();
         }
 

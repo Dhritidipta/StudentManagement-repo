@@ -3,6 +3,9 @@
     ViewBag.Title = "Edit Student Page";
 }
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
 <div id="back-btn">
     <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-primary">&lt;&lt; Back to home</a>
 </div>
@@ -11,42 +14,48 @@
         <div class="row mb-3">
             <label asp-for="FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control" value="@ViewBag.student.Name.Split(" ")[0]">
             </div>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="row mb-3">
             <label asp-for="LastName" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" value="@ViewBag.student.Name.Split(" ")[1]" />
             </div>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+
         </div>
 
         <div class="row mb-3">
             <label asp-for="Gender" class="col-md-2 control-label"></label>
 
             <div class="btn-group col-md-5 radio-toggle" role="group" aria-label="Basic radio toggle button group">
-                <input asp-for="Gender" value="Male" type="radio" class="btn-check" id="btnradio1" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btnradio1">Male</label>
 
-                <input asp-for="Gender" value="Female" type="radio" class="btn-check" id="btnradio2" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btnradio2">Female</label>
+                <input id="radio-male" asp-for="Gender" value="Male" type="radio" class="btn-check" autocomplete="off">
+                <label class="btn btn-outline-primary" for="radio-male">Male</label>
+
+                <input id="radio-female" asp-for="Gender" value="Female" type="radio" class="btn-check" autocomplete="off">
+                <label class="btn btn-outline-primary" for="radio-female">Female</label>
             </div>
+            <span asp-validation-for="Gender" class="text-danger"></span>
 
-            @*<div class="col-md-5">
-            <input asp-for="Gender" class="form-control" />
-        </div>*@
         </div>
         <div class="row mb-3">
             <label asp-for="Fees" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="Fees" class="form-control" />
+                <input asp-for="Fees" class="form-control" value="@ViewBag.student.Fees" />
             </div>
+            <span asp-validation-for="Fees" class="text-danger"></span>
+
         </div>
         <div class="row mb-3">
             <label asp-for="Age" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="Age" class="form-control" />
+                <input asp-for="Age" class="form-control" value="@ViewBag.student.Age" />
             </div>
+            <span asp-validation-for="Age" class="text-danger"></span>
+
         </div>
         <div class="row mb-3">
             <label asp-for="CourseName" class="col-md-2 control-label"></label>
@@ -54,19 +63,25 @@
                 <select asp-for="CourseName" asp-items="@ViewBag.courses" class="form-control">
                 </select>
             </div>
+            <span asp-validation-for="CourseName" class="text-danger"></span>
+
         </div>
         <div class="row mb-3">
             <label asp-for="Section" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="Section" asp-items="@ViewBag.sections" class="form-control"></select>
+                <select asp-for="Section" asp-items="@ViewBag.sections" class="form-control" value="@ViewBag.student.Section"></select>
             </div>
+            <span asp-validation-for="Section" class="text-danger"></span>
+
         </div>
 
         <div class="row mb-3">
             <label asp-for="DateOfAdmission" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="DateOfAdmission" class="form-control" />
+                <input asp-for="DateOfAdmission" class="form-control" value="@ViewBag.student.DateOfAdmission" />
             </div>
+            <span asp-validation-for="DateOfAdmission" class="text-danger"></span>
+
         </div>
 
         <div class="row mb-3 mt-3" id="btn-wrap">
@@ -79,3 +94,25 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    window.addEventListener('load', myfunc, false);
+
+    function myfunc() {
+        if ('@ViewBag.student.Gender' == "Male") {
+            document.getElementById("radio-male").setAttribute("checked", "true");
+        }
+        else {
+            document.getElementById("radio-female").setAttribute("checked", "true");
+        }
+
+        SelectElm = document.getElementById("CourseName");
+        SelectElm.value = '@ViewBag.student.CourseName';
+
+        SelectElm = document.getElementById("Section");
+        SelectElm.value = '@ViewBag.student.Section';
+
+    };
+
+
+</script>
