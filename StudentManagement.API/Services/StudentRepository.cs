@@ -37,6 +37,16 @@ namespace StudentManagement.API.Services
             _context.Student.Remove(student);
         }
 
+        public IEnumerable<Course> GetCourses()
+        {
+            return _context.Course.ToList<Course>();
+        }
+
+        public IEnumerable<Section> GetSections()
+        {
+            return _context.Section.ToList<Section>();
+        }
+
         public Student GetStudent(int Id)
         {
             //return _context.Student.FirstOrDefault(a => a.Id == Id);

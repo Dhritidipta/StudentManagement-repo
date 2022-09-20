@@ -83,5 +83,20 @@ namespace StudentManagement.API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("courses")]
+        public ActionResult<IEnumerable<CourseDto>> GetCourses()
+        {
+            var coursesFromRepo = _stuentRepository.GetCourses();
+            return Ok(_mapper.Map<IEnumerable<CourseDto>>(coursesFromRepo));
+        }
+        
+        
+        [HttpGet("sections")]
+        public ActionResult<IEnumerable<SectionDto>> GetSections()
+        {
+            var sectionsFromRepo = _stuentRepository.GetSections();
+            return Ok(_mapper.Map<IEnumerable<SectionDto>>(sectionsFromRepo));
+        }
     }
 }

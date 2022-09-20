@@ -16,7 +16,8 @@ namespace StudentManagement.API.Profiles
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
             CreateMap<StudentForCreationDto, Student>();
             CreateMap<StudentForUpdateDto, Student>();
-
+            CreateMap<Course, CourseDto>();
+            CreateMap<Section, SectionDto>();
         }
     }
 }

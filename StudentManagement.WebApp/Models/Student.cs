@@ -9,7 +9,6 @@ namespace StudentManagement.WebApp.Models
     public class Student
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public char Section { get; set; }
         public string Gender { get; set; }

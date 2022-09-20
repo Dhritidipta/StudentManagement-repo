@@ -24,9 +24,8 @@ namespace StudentManagement.API.Entities
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required]
-        [Column("section", TypeName ="char(1)")]
-        public char Section { get; set; }
+        public int? SectionId { get; set; }
+        public Section Section { get; set; }
 
         [Required]
         [Column("gender")]
@@ -41,10 +40,8 @@ namespace StudentManagement.API.Entities
         [Column("age")]
         public int Age { get; set; }
 
-        [Required]
-        [Column("course")]
-        [StringLength(50)]
-        public string CourseName { get; set; }
+        public int? CourseId { get; set; }
+        public Course Course { get; set; }
 
         [Required]
         [Column("dateOfAdmission")]

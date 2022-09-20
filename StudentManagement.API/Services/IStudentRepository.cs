@@ -13,6 +13,8 @@ namespace StudentManagement.API.Services
         void AddStudent(Student student);
         void UpdateStudent(Student student);
         void DeleteStudent(Student student);
+        IEnumerable<Course> GetCourses();
+        IEnumerable<Section> GetSections();
         bool Save();
     }
 }

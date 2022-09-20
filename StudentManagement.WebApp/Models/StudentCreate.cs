@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using StudentManagement.WebApp.Validation;
 
 namespace StudentManagement.WebApp.Models
 {
@@ -22,6 +23,7 @@ namespace StudentManagement.WebApp.Models
         [Required]
         public int Fees { get; set; }
         [Required]
+        [AgeShouldBeWithinRange(20, 100)]
         public int Age { get; set; }
         [Required]
         [Display(Name = "Course Name")]
