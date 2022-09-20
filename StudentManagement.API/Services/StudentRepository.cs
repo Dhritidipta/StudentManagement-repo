@@ -1,4 +1,5 @@
-﻿using StudentManagement.API.DbContexts;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentManagement.API.DbContexts;
 using StudentManagement.API.Entities;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,10 @@ namespace StudentManagement.API.Services
 
         public Student GetStudent(int Id)
         {
-            return _context.Student.FirstOrDefault(a => a.Id == Id);
+            //return _context.Student.FirstOrDefault(a => a.Id == Id);
+
+            //using stored procedure instead of Linq
+            return _context.Student.FromSqlRaw<Student>("spGetStudentById {0}", Id).ToList().FirstOrDefault();
         }
 
         public IEnumerable<Student> GetStudents()
