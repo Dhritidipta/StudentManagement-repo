@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220920181806_tweak.cs" />
     <Compile Remove="Migrations\20220920181806_tweak.Designer.cs" />
+    <Compile Remove="Migrations\20220921135252_ModifyCourseSection.cs" />
+    <Compile Remove="Migrations\20220921135252_ModifyCourseSection.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
