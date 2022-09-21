@@ -27,7 +27,7 @@ namespace StudentManagement.WebApp.Models
         public int Age { get; set; }
         [Required]
         [Display(Name = "Course Name")]
-        public string CourseName { get; set; }
+        public int CourseId { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Admission")]

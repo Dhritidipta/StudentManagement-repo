@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StudentManagement.API.Interfaces;
 using StudentManagement.API.Models;
-using StudentManagement.API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,55 +14,43 @@ namespace StudentManagement.API.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentRepository _stuentRepository;
-        private readonly IMapper _mapper;
+        private readonly IStudentBLL _BLL;
 
-        public StudentsController(IStudentRepository studentRepository, IMapper mapper)
+        public StudentsController(IStudentBLL bLL)
         {
-            _stuentRepository = studentRepository ?? throw new ArgumentNullException(nameof(studentRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _BLL = bLL ?? throw new ArgumentNullException(nameof(bLL));
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<StudentDto>> Getstudents()
+        public ActionResult<IEnumerable<StudentDto>> GetStudents()
         {
-            var studentsFromRepo = _stuentRepository.GetStudents();
-            return Ok(_mapper.Map<IEnumerable<StudentDto>>(studentsFromRepo));
+            var data = _BLL.GetStudents();
+            return Ok(data);
         }
 
         [HttpGet("{id}", Name ="GetStudent")]
         public ActionResult GetStudent(int id)
         {
-            var studentsFromRepo = _stuentRepository.GetStudent(id);
-
-            if(studentsFromRepo == null)
+            var data = _BLL.GetStudent(id);
+            if(data == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<StudentDto>(studentsFromRepo));
+            return Ok(data);
         }
 
         [HttpPost]
         public ActionResult<StudentDto> CreateStudent(StudentForCreationDto student)
         {
-            var studentEntity = _mapper.Map<Entities.Student>(student);
-            _stuentRepository.AddStudent(studentEntity);
-            _stuentRepository.Save();
-
-            var studentToReturn = _mapper.Map<StudentDto>(studentEntity);
-            return CreatedAtRoute("GetStudent", new { id = studentToReturn.Id }, studentToReturn);
+            var data = _BLL.AddStudent(student);
+            return CreatedAtRoute("GetStudent", new { id = data.Id }, data);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateStudent(int id, StudentForUpdateDto student)
         {
-            var studentFromRepo = _stuentRepository.GetStudent(id);
-
-            _mapper.Map(student, studentFromRepo);
-
-            _stuentRepository.UpdateStudent(studentFromRepo);
-            _stuentRepository.Save();
+            _BLL.UpdateStudent(id, student);
 
             return NoContent();
 
@@ -71,32 +59,32 @@ namespace StudentManagement.API.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteStudent(int id)
         {
-            var studentFromRepo = _stuentRepository.GetStudent(id);
-
-            if(studentFromRepo == null)
+            try
+            {
+                _BLL.DeleteStudent(id);
+            }
+            catch
             {
                 return NotFound();
             }
 
-            _stuentRepository.DeleteStudent(studentFromRepo);
-            _stuentRepository.Save();
-
             return NoContent();
         }
 
-        [HttpGet("courses")]
+        [Route("~/api/courses")]
+        [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
-            var coursesFromRepo = _stuentRepository.GetCourses();
-            return Ok(_mapper.Map<IEnumerable<CourseDto>>(coursesFromRepo));
+            var data = _BLL.GetCourses();
+            return Ok(data);
         }
-        
-        
-        [HttpGet("sections")]
+
+        [Route("~/api/sections")]
+        [HttpGet]
         public ActionResult<IEnumerable<SectionDto>> GetSections()
         {
-            var sectionsFromRepo = _stuentRepository.GetSections();
-            return Ok(_mapper.Map<IEnumerable<SectionDto>>(sectionsFromRepo));
+            var data = _BLL.GetSections();
+            return Ok(data);
         }
     }
 }

@@ -1,18 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentManagement.API.DbContexts;
 using StudentManagement.API.Entities;
+using StudentManagement.API.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StudentManagement.API.Services
+namespace StudentManagement.API.Data_Access_Layer
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentDAL : IStudentDAL
     {
         private readonly StudentMgmtContext _context;
 
-        public StudentRepository(StudentMgmtContext context)
+        public StudentDAL(StudentMgmtContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

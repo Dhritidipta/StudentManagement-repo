@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StudentManagement.API.Business_Logic_Layer;
+using StudentManagement.API.Data_Access_Layer;
 using StudentManagement.API.DbContexts;
-using StudentManagement.API.Services;
+using StudentManagement.API.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +41,9 @@ namespace StudentManagement.API
             services.AddDbContext<StudentMgmtContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //Repository
-            services.AddScoped<IStudentRepository, StudentRepository>();
+            //DI
+            services.AddScoped<IStudentDAL, StudentDAL>();
+            services.AddScoped<IStudentBLL, StudentBLL>();
 
             //Enable CORS Policy
             services.AddCors(c => {

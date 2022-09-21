@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StudentManagement.API.Services
+namespace StudentManagement.API.Interfaces
 {
-    public interface IStudentRepository
+    public interface IStudentDAL
     {
         IEnumerable<Student> GetStudents();
         Student GetStudent(int Id);
