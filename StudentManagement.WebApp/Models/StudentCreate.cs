@@ -17,7 +17,8 @@ namespace StudentManagement.WebApp.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        public char Section { get; set; }
+        [Display(Name ="Section")]
+        public int SectionId { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]
