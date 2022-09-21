@@ -46,7 +46,7 @@ namespace StudentManagement.WebApp.Controllers
             foreach (var item in courses)
             {
 
-                courseList.Add(new SelectListItem { Value = item.CourseId.ToString() , Text = item.CourseName });
+                courseList.Add(new SelectListItem { Value = item.CourseName , Text = item.CourseName });
             }
 
             var sections = GetDetailsUtility.GetSectionsList(); ;
@@ -55,7 +55,7 @@ namespace StudentManagement.WebApp.Controllers
             foreach (var item in sections)
             {
 
-                sectionList.Add(new SelectListItem { Value = item.SectionId.ToString(), Text = item.SectionName });
+                sectionList.Add(new SelectListItem { Value = item.SectionName, Text = item.SectionName });
             }
 
             //assigning SelectListItem to view Bag
@@ -68,8 +68,9 @@ namespace StudentManagement.WebApp.Controllers
         public IActionResult Create(StudentCreate student)
         {
 
-            using (var client = new HttpClient())
+            if (ModelState.IsValid)
             {
+                using var client = new HttpClient();
                 client.BaseAddress = new Uri(BaseUrl);
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(student), System.Text.Encoding.UTF8, "application/json");
@@ -83,8 +84,7 @@ namespace StudentManagement.WebApp.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-
-            ModelState.AddModelError(string.Empty, "Server Error.");
+            
 
             return View(student);
         }

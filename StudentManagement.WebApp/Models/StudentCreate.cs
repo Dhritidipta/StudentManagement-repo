@@ -18,17 +18,18 @@ namespace StudentManagement.WebApp.Models
         public string LastName { get; set; }
         [Required]
         [Display(Name ="Section")]
-        public int SectionId { get; set; }
+        public string Section { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]
         public int Fees { get; set; }
+
         [Required]
         [AgeShouldBeWithinRange(20, 100)]
         public int Age { get; set; }
         [Required]
         [Display(Name = "Course Name")]
-        public int CourseId { get; set; }
+        public string Course { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Admission")]

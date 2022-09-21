@@ -59,18 +59,18 @@
 
         </div>
         <div class="row mb-3">
-            <label asp-for="CourseName" class="col-md-2 control-label"></label>
+            <label asp-for="Course" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="CourseName" asp-items="@ViewBag.courses" class="form-control">
+                <select asp-for="Course" asp-items="@ViewBag.courses" id="CourseName" class="form-control">
                 </select>
             </div>
-            <span asp-validation-for="CourseName" class="text-danger"></span>
+            <span asp-validation-for="Course" class="text-danger"></span>
 
         </div>
         <div class="row mb-3">
             <label asp-for="Section" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="Section" asp-items="@ViewBag.sections" class="form-control" value="@ViewBag.student.Section"></select>
+                <select asp-for="Section" asp-items="@ViewBag.sections" id="Section" class="form-control" value="@ViewBag.student.Section"></select>
             </div>
             <span asp-validation-for="Section" class="text-danger"></span>
 
@@ -79,10 +79,9 @@
         <div class="row mb-3">
             <label asp-for="DateOfAdmission" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="DateOfAdmission" class="form-control" value="@ViewBag.student.DateOfAdmission" />
+                <input type="date" asp-for="DateOfAdmission" class="form-control" value="@ViewBag.student.DateOfAdmission.Date.ToString("yyyy-MM-dd")" />
             </div>
             <span asp-validation-for="DateOfAdmission" class="text-danger"></span>
-
         </div>
 
         <div class="row mb-3 mt-3" id="btn-wrap">
@@ -108,7 +107,7 @@
         }
 
         SelectElm = document.getElementById("CourseName");
-        SelectElm.value = '@ViewBag.student.CourseName';
+        SelectElm.value = '@ViewBag.student.Course';
 
         SelectElm = document.getElementById("Section");
         SelectElm.value = '@ViewBag.student.Section';

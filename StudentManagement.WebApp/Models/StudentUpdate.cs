@@ -16,7 +16,7 @@ namespace StudentManagement.WebApp.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        public char Section { get; set; }
+        public string Section { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]
@@ -25,7 +25,7 @@ namespace StudentManagement.WebApp.Models
         public int Age { get; set; }
         [Required]
         [Display(Name = "Course Name")]
-        public String CourseName { get; set; }
+        public string Course { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Admission")]

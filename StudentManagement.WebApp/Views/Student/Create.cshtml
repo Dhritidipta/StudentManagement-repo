@@ -57,19 +57,19 @@
 
         </div>
         <div class="row mb-3">
-            <label asp-for="CourseId" class="col-md-2 control-label"></label>
+            <label asp-for="Course" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="CourseId" asp-items="@ViewBag.courses" class="form-control">
+                <select asp-for="Course" asp-items="@ViewBag.courses" class="form-control">
                 </select>
             </div>
-            <span asp-validation-for="CourseId" class="text-danger"></span>
+            <span asp-validation-for="Course" class="text-danger"></span>
         </div>
         <div class="row mb-3">
-            <label asp-for="SectionId" class="col-md-2 control-label"></label>
+            <label asp-for="Section" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="SectionId" asp-items="@ViewBag.sections" class="form-control"></select>
+                <select asp-for="Section" asp-items="@ViewBag.sections" class="form-control"></select>
             </div>
-            <span asp-validation-for="SectionId" class="text-danger"></span>
+            <span asp-validation-for="Section" class="text-danger"></span>
         </div>
 
         <div class="row mb-3">
@@ -82,7 +82,7 @@
 
         <div class="row mb-3 mt-3" id="btn-wrap">
             <div id="cancel-btn" class="col-md-2">
-                <a asp-action="Index" role="button" class="btn btn-primary">Cancel</a>
+                <a asp-action="Index" asp-controller="Home" role="button" class="btn btn-primary">Cancel</a>
             </div>
             <div id="add-btn" class="col-md-5">
                 <input type="submit" class="btn btn-primary" value="Add" />
