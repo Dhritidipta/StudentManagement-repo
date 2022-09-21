@@ -49,7 +49,7 @@ namespace StudentManagement.API.Business_Logic_Layer
 
         public IEnumerable<SectionDto> GetSections()
         {
-            var sectionsFromDAL = _DAL.GetCourses();
+            var sectionsFromDAL = _DAL.GetSections();
             return _mapper.Map<IEnumerable<SectionDto>>(sectionsFromDAL);
         }
 
