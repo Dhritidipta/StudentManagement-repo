@@ -25,7 +25,7 @@ namespace StudentManagement.WebApp.Validation
         {
             var student = (StudentCreate)validationContext.ObjectInstance;
             
-            if(student.Age < Lower && student.Age > Upper)
+            if(student.Age < Lower || student.Age > Upper)
             {
                 return new ValidationResult(GetErrorMessage());
             }
