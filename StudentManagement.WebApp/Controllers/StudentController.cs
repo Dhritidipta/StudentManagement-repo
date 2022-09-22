@@ -40,14 +40,14 @@ namespace StudentManagement.WebApp.Controllers
 
         public IActionResult Create()
         {
-            var courses = GetDetailsUtility.GetCoursesList();
+            //var courses = GetDetailsUtility.GetCoursesList();
 
-            List<SelectListItem> courseList = new List<SelectListItem>();
-            foreach (var item in courses)
-            {
+            //List<SelectListItem> courseList = new List<SelectListItem>();
+            //foreach (var item in courses)
+            //{
 
-                courseList.Add(new SelectListItem { Value = item.CourseName , Text = item.CourseName });
-            }
+            //    courseList.Add(new SelectListItem { Value = item.CourseName , Text = item.CourseName });
+            //}
 
             var sections = GetDetailsUtility.GetSectionsList(); ;
 
@@ -59,7 +59,7 @@ namespace StudentManagement.WebApp.Controllers
             }
 
             //assigning SelectListItem to view Bag
-            ViewBag.courses = courseList;
+            //ViewBag.courses = courseList;
             ViewBag.sections = sectionList;
             return View();
         }
@@ -84,31 +84,12 @@ namespace StudentManagement.WebApp.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            
 
             return View(student);
         }
 
         public ViewResult Edit(int id)
-        {
-            var courses = GetDetailsUtility.GetCoursesList();
-
-            List<SelectListItem> courseList = new List<SelectListItem>();
-            foreach (var item in courses)
-            {
-
-                courseList.Add(new SelectListItem { Value = item.CourseName, Text = item.CourseName });
-            }
-
-            var sections = GetDetailsUtility.GetSectionsList(); ;
-
-            List<SelectListItem> sectionList = new List<SelectListItem>();
-            foreach (var item in sections)
-            {
-
-                sectionList.Add(new SelectListItem { Value = item.SectionName, Text = item.SectionName });
-            }
-
+        { 
             Student student = null;
             using (var client = new HttpClient())
             {
@@ -120,9 +101,6 @@ namespace StudentManagement.WebApp.Controllers
                     student = JsonConvert.DeserializeObject<Student>(response.Content.ReadAsStringAsync().Result);
                 }
             }
-            //assigning SelectListItem to view Bag
-            ViewBag.courses = courseList;
-            ViewBag.sections = sectionList;
 
             ViewBag.id = id;
             ViewBag.student = student;

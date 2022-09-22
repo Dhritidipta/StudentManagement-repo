@@ -61,7 +61,7 @@
         <div class="row mb-3">
             <label asp-for="Course" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="Course" asp-items="@ViewBag.courses" id="CourseName" class="form-control">
+                <select asp-for="Course" id="coursesDropDown" class="form-control">
                 </select>
             </div>
             <span asp-validation-for="Course" class="text-danger"></span>
@@ -70,7 +70,7 @@
         <div class="row mb-3">
             <label asp-for="Section" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="Section" asp-items="@ViewBag.sections" id="Section" class="form-control" value="@ViewBag.student.Section"></select>
+                <select id="sectionsDropDown" asp-for="Section" class="form-control"></select>
             </div>
             <span asp-validation-for="Section" class="text-danger"></span>
 
@@ -95,6 +95,8 @@
     </form>
 </div>
 
+<script src="~/js/site.js" asp-append-version="true"></script>
+
 <script type="text/javascript">
     window.addEventListener('load', myfunc, false);
 
@@ -106,13 +108,16 @@
             document.getElementById("radio-female").setAttribute("checked", "true");
         }
 
-        SelectElm = document.getElementById("CourseName");
+        SelectElm = document.getElementById("coursesDropDown");
         SelectElm.value = '@ViewBag.student.Course';
 
-        SelectElm = document.getElementById("Section");
+        SelectElm = document.getElementById("sectionsDropDown");
         SelectElm.value = '@ViewBag.student.Section';
 
+
+
     };
+
 
 
 </script>

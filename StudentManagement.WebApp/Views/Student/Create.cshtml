@@ -12,6 +12,8 @@
 </div>
 <div class="m-auto" id="wrap-form">
     <form asp-action="Create" method="post" role="form">
+        <ValidationSummary></ValidationSummary>
+        <DataAnnotationsValidator />
         <div class="row mb-3">
             <label asp-for="FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-5">
@@ -51,7 +53,7 @@
         <div class="row mb-3">
             <label asp-for="Age" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <input asp-for="Age" class="form-control"/>
+                <input asp-for="Age" class="form-control" />
             </div>
             <span asp-validation-for="Age" class="text-danger"></span>
 
@@ -59,7 +61,8 @@
         <div class="row mb-3">
             <label asp-for="Course" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="Course" asp-items="@ViewBag.courses" class="form-control">
+                <select id="coursesDropDown" asp-for="Course" class="form-control">
+                    <option value="0">--Select Course--</option>
                 </select>
             </div>
             <span asp-validation-for="Course" class="text-danger"></span>
@@ -67,7 +70,10 @@
         <div class="row mb-3">
             <label asp-for="Section" class="col-md-2 control-label"></label>
             <div class="col-md-5">
-                <select asp-for="Section" asp-items="@ViewBag.sections" class="form-control"></select>
+                <select id="sectionsDropDown" asp-for="Section" class="form-control">
+                    <option value="0">--Select Section--</option>
+
+                </select>
             </div>
             <span asp-validation-for="Section" class="text-danger"></span>
         </div>
@@ -90,3 +96,5 @@
         </div>
     </form>
 </div>
+
+<script src="~/js/site.js" asp-append-version="true"></script>

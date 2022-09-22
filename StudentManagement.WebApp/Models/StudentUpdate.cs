@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentManagement.WebApp.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace StudentManagement.WebApp.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        [CheckSelctedValue(ErrorMessage = "Please select a valid category")]
         public string Section { get; set; }
         [Required]
         public string Gender { get; set; }
@@ -25,6 +27,7 @@ namespace StudentManagement.WebApp.Models
         public int Age { get; set; }
         [Required]
         [Display(Name = "Course Name")]
+        [CheckSelctedValue(ErrorMessage = "Please select a valid category")]
         public string Course { get; set; }
         [Required]
         [DataType(DataType.Date)]

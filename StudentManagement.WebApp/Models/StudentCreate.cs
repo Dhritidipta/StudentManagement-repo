@@ -18,6 +18,7 @@ namespace StudentManagement.WebApp.Models
         public string LastName { get; set; }
         [Required]
         [Display(Name ="Section")]
+        [CheckSelctedValue(ErrorMessage = "Please select a valid category")]
         public string Section { get; set; }
         [Required]
         public string Gender { get; set; }
@@ -29,6 +30,7 @@ namespace StudentManagement.WebApp.Models
         public int Age { get; set; }
         [Required]
         [Display(Name = "Course Name")]
+        [CheckSelctedValue(ErrorMessage = "Please select a valid category")]
         public string Course { get; set; }
         [Required]
         [DataType(DataType.Date)]
