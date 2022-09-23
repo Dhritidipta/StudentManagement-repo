@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagement.API.Interfaces
 {
-    public interface IStudentBLL
+    public interface IStudentService
     {
         IEnumerable<StudentDto> GetStudents();
         StudentDto GetStudent(int Id);

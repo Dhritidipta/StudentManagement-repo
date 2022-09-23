@@ -7,72 +7,72 @@ using StudentManagement.API.Entities;
 using StudentManagement.API.Interfaces;
 using StudentManagement.API.Models;
 
-namespace StudentManagement.API.Business_Logic_Layer
+namespace StudentManagement.API.Services
 {
-    public class StudentBLL : IStudentBLL
+    public class StudentService : IStudentService
     {
-        private readonly IStudentDAL _DAL;
+        private readonly IStudentRepository _studentRepo;
         private readonly IMapper _mapper;
 
-        public StudentBLL(IStudentDAL dAL, IMapper mapper)
+        public StudentService(IStudentRepository studentRepository, IMapper mapper)
         {
-            _DAL = dAL;
+            _studentRepo = studentRepository;
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
         public StudentDto AddStudent(StudentForCreationDto studentCreationDto)
         {
             var studentEntity = _mapper.Map<Student>(studentCreationDto);
-            _DAL.AddStudent(studentEntity);
-            _DAL.Save();
+            _studentRepo.AddStudent(studentEntity);
+            _studentRepo.Save();
 
             return _mapper.Map<StudentDto>(studentEntity);
         }
 
         public void DeleteStudent(int id)
         {
-            var studentFromDAL = _DAL.GetStudent(id);
+            var studentFromRepo = _studentRepo.GetStudent(id);
 
-            if (studentFromDAL == null)
+            if (studentFromRepo == null)
             {
                 throw new NullReferenceException("Not found");
             }
 
-            _DAL.DeleteStudent(studentFromDAL);
-            _DAL.Save();
+            _studentRepo.DeleteStudent(studentFromRepo);
+            _studentRepo.Save();
         }
 
         public IEnumerable<CourseDto> GetCourses()
         {
-            var coursesFromDAL = _DAL.GetCourses();
+            var coursesFromDAL = _studentRepo.GetCourses();
             return _mapper.Map<IEnumerable<CourseDto>>(coursesFromDAL);
         }
 
         public IEnumerable<SectionDto> GetSections()
         {
-            var sectionsFromDAL = _DAL.GetSections();
+            var sectionsFromDAL = _studentRepo.GetSections();
             return _mapper.Map<IEnumerable<SectionDto>>(sectionsFromDAL);
         }
 
         public StudentDto GetStudent(int id)
         {
-            var studentsFromDAL = _DAL.GetStudent(id);
+            var studentsFromDAL = _studentRepo.GetStudent(id);
             return _mapper.Map<StudentDto>(studentsFromDAL);
         }
 
         public IEnumerable<StudentDto> GetStudents()
         {
-            var studentsFromDAL = _DAL.GetStudents();
+            var studentsFromDAL = _studentRepo.GetStudents();
             return _mapper.Map<IEnumerable<StudentDto>>(studentsFromDAL);
         }
 
         public void UpdateStudent(int id, StudentForUpdateDto studentUpdateDto)
         {
-            var studentFromDAL = _DAL.GetStudent(id);
+            var studentFromRepo = _studentRepo.GetStudent(id);
 
-            _mapper.Map(studentUpdateDto, studentFromDAL);
+            _mapper.Map(studentUpdateDto, studentFromRepo);
 
-            _DAL.UpdateStudent(studentFromDAL);
-            _DAL.Save();
+            _studentRepo.UpdateStudent(studentFromRepo);
+            _studentRepo.Save();
         }
     }
 }

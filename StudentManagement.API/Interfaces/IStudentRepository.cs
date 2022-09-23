@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagement.API.Interfaces
 {
-    public interface IStudentDAL
+    public interface IStudentRepository
     {
         IEnumerable<Student> GetStudents();
         Student GetStudent(int Id);

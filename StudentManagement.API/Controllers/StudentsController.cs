@@ -14,24 +14,24 @@ namespace StudentManagement.API.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentBLL _BLL;
+        private readonly IStudentService _studentService;
 
-        public StudentsController(IStudentBLL bLL)
+        public StudentsController(IStudentService studentService)
         {
-            _BLL = bLL ?? throw new ArgumentNullException(nameof(bLL));
+            _studentService = studentService ?? throw new ArgumentNullException(nameof(studentService));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<StudentDto>> GetStudents()
         {
-            var data = _BLL.GetStudents();
+            var data = _studentService.GetStudents();
             return Ok(data);
         }
 
         [HttpGet("{id}", Name ="GetStudent")]
         public ActionResult GetStudent(int id)
         {
-            var data = _BLL.GetStudent(id);
+            var data = _studentService.GetStudent(id);
             if(data == null)
             {
                 return NotFound();
@@ -43,14 +43,14 @@ namespace StudentManagement.API.Controllers
         [HttpPost]
         public ActionResult<StudentDto> CreateStudent(StudentForCreationDto student)
         {
-            var data = _BLL.AddStudent(student);
+            var data = _studentService.AddStudent(student);
             return CreatedAtRoute("GetStudent", new { id = data.Id }, data);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateStudent(int id, StudentForUpdateDto student)
         {
-            _BLL.UpdateStudent(id, student);
+            _studentService.UpdateStudent(id, student);
 
             return NoContent();
 
@@ -61,7 +61,7 @@ namespace StudentManagement.API.Controllers
         {
             try
             {
-                _BLL.DeleteStudent(id);
+                _studentService.DeleteStudent(id);
             }
             catch
             {
@@ -75,7 +75,7 @@ namespace StudentManagement.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
-            var data = _BLL.GetCourses();
+            var data = _studentService.GetCourses();
             return Ok(data);
         }
 
@@ -83,7 +83,7 @@ namespace StudentManagement.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<SectionDto>> GetSections()
         {
-            var data = _BLL.GetSections();
+            var data = _studentService.GetSections();
             return Ok(data);
         }
     }

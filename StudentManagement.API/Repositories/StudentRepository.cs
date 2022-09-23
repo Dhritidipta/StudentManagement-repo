@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StudentManagement.API.Data_Access_Layer
+namespace StudentManagement.API.Repositories
 {
-    public class StudentDAL : IStudentDAL
+    public class StudentRepository : IStudentRepository
     {
         private readonly StudentMgmtContext _context;
 
-        public StudentDAL(StudentMgmtContext context)
+        public StudentRepository(StudentMgmtContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

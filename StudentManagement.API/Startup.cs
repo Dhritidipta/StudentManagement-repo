@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using StudentManagement.API.Business_Logic_Layer;
-using StudentManagement.API.Data_Access_Layer;
+using StudentManagement.API.Services;
+using StudentManagement.API.Repositories;
 using StudentManagement.API.DbContexts;
 using StudentManagement.API.Interfaces;
 using System;
@@ -42,8 +42,8 @@ namespace StudentManagement.API
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //DI
-            services.AddScoped<IStudentDAL, StudentDAL>();
-            services.AddScoped<IStudentBLL, StudentBLL>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IStudentService, StudentService>();
 
             //Swagger
             services.AddSwaggerGen();
