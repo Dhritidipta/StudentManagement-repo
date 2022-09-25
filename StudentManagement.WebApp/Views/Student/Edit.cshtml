@@ -8,10 +8,10 @@
 }
 
 <div id="back-btn">
-    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-primary">&lt;&lt; Back to home</a>
+    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-primary">&lt;&lt; Back to home</a>
 </div>
 <div class="m-auto" id="wrap-form">
-    <form asp-action="Edit" asp-route-id="@ViewBag.id" method="post" role="form">
+    <form asp-action="Edit" asp-route-id="@ViewBag.id" method="post" role="form" class="labels-bold">
         <div class="row mb-3">
             <label asp-for="FirstName" class="col-md-2 control-label"></label>
             <div class="col-md-5">
@@ -86,10 +86,10 @@
 
         <div class="row mb-3 mt-3" id="btn-wrap">
             <div id="cancel-btn" class="col-md-2">
-                <a asp-action="Index" asp-controller="Home" role="button" class="btn btn-primary">Cancel</a>
+                <a asp-action="Index" asp-controller="Home" role="button" class="btn btn-outline-primary">Cancel</a>
             </div>
             <div id="add-btn" class="col-md-5">
-                <input type="submit" class="btn btn-primary" value="Update" />
+                <input type="submit" class="btn btn-outline-primary" value="Update" />
             </div>
         </div>
     </form>

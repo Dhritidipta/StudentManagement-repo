@@ -13,60 +13,63 @@
 
 <div class="container">
     <div class="nav-btn">
-        <div class="rightsided-btn">
-            <a asp-action="Index" asp-controller="Home" role="button" class="btn btn-primary">&lt;&lt; Back to home</a>
+        <div class="float-left">
+            <a asp-action="Index" asp-controller="Home" role="button" class="btn btn-outline-danger">&lt;&lt; Back to home</a>
         </div>
-        <div class="rightsided-btn">
-            <a asp-action="Edit" asp-route-id="@Model.Id" role="button" class="btn btn-primary">Edit</a>
+        <div class="float-right">
+            <a asp-action="Edit" asp-route-id="@Model.Id" role="button" class="btn btn-outline-primary">Edit</a>
         </div>
     </div>
-    <table class="table table-striped">
-        <tbody>
-            <tr>
-                <td>First Name</td>
-                <td>@Model.Name.Split(" ")[0]</td>
-            </tr>
-            <tr>
-                <td>Last Name</td>
-                <td>@Model.Name.Split(" ")[1]</td>
-            </tr>
-            <tr>
-                <td>Gender</td>
-                <td>@Model.Gender</td>
-            </tr>
-            <tr>
-                <td>Fees</td>
-                <td>@Model.Fees</td>
-            </tr>
-            <tr>
-                <td>Age</td>
-                <td>@Model.Age</td>
-            </tr>
-            <tr>
-                <td>Course Name</td>
-                <td>@Model.Course</td>
-            </tr>
-            <tr>
-                <td>Section Assigned</td>
-                <td>@Model.Section</td>
-            </tr>
-            <tr>
-                <td>Date of Admission</td>
-                <td>@Model.DateOfAdmission.ToString("dd/MM/yyyy")</td>
-            </tr>
+    <div class="clearfix"></div>
+    <div class="card mt-5 col-md-6 mx-auto p-0 shadow">
+        <table class="table table-striped bold-text">
+            <tbody>
+                <tr>
+                    <td>First Name</td>
+                    <td>@Model.Name.Split(" ")[0]</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>@Model.Name.Split(" ")[1]</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>@Model.Gender</td>
+                </tr>
+                <tr>
+                    <td>Fees</td>
+                    <td>@Model.Fees</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>@Model.Age</td>
+                </tr>
+                <tr>
+                    <td>Course Name</td>
+                    <td>@Model.Course</td>
+                </tr>
+                <tr>
+                    <td>Section Assigned</td>
+                    <td>@Model.Section</td>
+                </tr>
+                <tr>
+                    <td>Date of Admission</td>
+                    <td>@Model.DateOfAdmission.ToString("dd/MM/yyyy")</td>
+                </tr>
 
-            @*<tr>
-            <th scope="row">@Model.Id</th>
-            <td><a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-link btn-sm">@Model.Name</a></td>
-            <td>@Model.Section</td>
-            <td>@Model.Gender</td>
-            <td>@Model.CourseName</td>
-            <td>@Model.DateOfAdmission</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-sm text-white">Edit</a>
-                <a asp-action="Delete" asp-route-id="@Model.Id" asp- class="btn btn-danger btn-sm text-white" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
-            </td>
-        </tr>*@
-        </tbody>
-    </table>
+                @*<tr>
+                    <th scope="row">@Model.Id</th>
+                    <td><a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-link btn-sm">@Model.Name</a></td>
+                    <td>@Model.Section</td>
+                    <td>@Model.Gender</td>
+                    <td>@Model.CourseName</td>
+                    <td>@Model.DateOfAdmission</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success btn-sm text-white">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" asp- class="btn btn-danger btn-sm text-white" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    </td>
+                </tr>*@
+            </tbody>
+        </table>
+    </div>
 </div>

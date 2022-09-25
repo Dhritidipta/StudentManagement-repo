@@ -40,3 +40,10 @@ label {
     border-bottom-left-radius: 0.25rem;
 }
 
+.bold-text td:first-of-type, .labels-bold label{
+    font-weight: bold;
+}
+
+.small-text {
+    font-size: 0.875rem;
+}
