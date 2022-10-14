@@ -13,23 +13,23 @@
 <div class="m-auto" id="wrap-form">
     <form asp-action="Edit" asp-route-id="@ViewBag.id" method="post" role="form" class="labels-bold">
         <div class="row mb-3">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <label asp-for="FirstName" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <input asp-for="FirstName" class="form-control" value="@ViewBag.student.Name.Split(" ")[0]">
+                <input asp-for="FirstName" class="form-control" value="@ViewBag.student.Student.FirstName">
             </div>
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="row mb-3">
-            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <label asp-for="LastName" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <input asp-for="LastName" class="form-control" value="@ViewBag.student.Name.Split(" ")[1]" />
+                <input asp-for="LastName" class="form-control" value="@ViewBag.student.Student.LastName" />
             </div>
             <span asp-validation-for="LastName" class="text-danger"></span>
 
         </div>
 
         <div class="row mb-3">
-            <label asp-for="Gender" class="col-md-2 control-label"></label>
+            <label asp-for="Gender" class="col-md-2 control-label required"></label>
 
             <div class="btn-group col-md-5 radio-toggle" role="group" aria-label="Basic radio toggle button group">
 
@@ -43,43 +43,43 @@
 
         </div>
         <div class="row mb-3">
-            <label asp-for="Fees" class="col-md-2 control-label"></label>
+            <label asp-for="Fees" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <input asp-for="Fees" class="form-control" value="@ViewBag.student.Fees" />
+                <input asp-for="Fees" class="form-control" value="@ViewBag.student.Student.Fees" />
             </div>
             <span asp-validation-for="Fees" class="text-danger"></span>
 
         </div>
         <div class="row mb-3">
-            <label asp-for="Age" class="col-md-2 control-label"></label>
+            <label asp-for="Age" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <input asp-for="Age" class="form-control" value="@ViewBag.student.Age" />
+                <input asp-for="Age" class="form-control" value="@ViewBag.student.Student.Age" />
             </div>
             <span asp-validation-for="Age" class="text-danger"></span>
 
         </div>
         <div class="row mb-3">
-            <label asp-for="Course" class="col-md-2 control-label"></label>
+            <label asp-for="CourseId" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <select asp-for="Course" id="coursesDropDown" class="form-control">
+                <select asp-for="CourseId" id="coursesDropDown" class="form-control">
                 </select>
             </div>
-            <span asp-validation-for="Course" class="text-danger"></span>
+            <span asp-validation-for="CourseId" class="text-danger"></span>
 
         </div>
         <div class="row mb-3">
-            <label asp-for="Section" class="col-md-2 control-label"></label>
+            <label asp-for="SectionId" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <select id="sectionsDropDown" asp-for="Section" class="form-control"></select>
+                <select id="sectionsDropDown" asp-for="SectionId" class="form-control"></select>
             </div>
-            <span asp-validation-for="Section" class="text-danger"></span>
+            <span asp-validation-for="SectionId" class="text-danger"></span>
 
         </div>
 
         <div class="row mb-3">
-            <label asp-for="DateOfAdmission" class="col-md-2 control-label"></label>
+            <label asp-for="DateOfAdmission" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <input type="date" asp-for="DateOfAdmission" class="form-control" value="@ViewBag.student.DateOfAdmission.Date.ToString("yyyy-MM-dd")" />
+                <input type="date" asp-for="DateOfAdmission" class="form-control" value="@ViewBag.student.Student.DateOfAdmission.Date.ToString("yyyy-MM-dd")" />
             </div>
             <span asp-validation-for="DateOfAdmission" class="text-danger"></span>
         </div>
@@ -101,7 +101,7 @@
     window.addEventListener('load', myfunc, false);
 
     function myfunc() {
-        if ('@ViewBag.student.Gender' == "Male") {
+        if ('@ViewBag.student.Student.Gender' == "Male") {
             document.getElementById("radio-male").setAttribute("checked", "true");
         }
         else {
@@ -109,10 +109,9 @@
         }
 
         SelectElm = document.getElementById("coursesDropDown");
-        SelectElm.value = '@ViewBag.student.Course';
-
+        SelectElm.value = "@ViewBag.student.Student.CourseId";
         SelectElm = document.getElementById("sectionsDropDown");
-        SelectElm.value = '@ViewBag.student.Section';
+        SelectElm.value = '@ViewBag.student.Student.SectionId';
 
 
 

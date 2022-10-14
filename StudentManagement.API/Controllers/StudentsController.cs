@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using StudentManagement.API.Entities;
+using StudentManagement.API.Helpers;
 using StudentManagement.API.Interfaces;
 using StudentManagement.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 
@@ -22,10 +26,25 @@ namespace StudentManagement.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<StudentDto>> GetStudents()
+        public ActionResult<IEnumerable<StudentDto>> GetStudents([FromQuery] StudentParameters studentParameters)
         {
-            var data = _studentService.GetStudents();
-            return Ok(data);
+            (IEnumerable<StudentCSModel>,Metadata) data;
+            IEnumerable<StudentCSModel> students; 
+            try
+            {
+                data = _studentService.GetStudents(studentParameters);
+
+            }
+            catch (NullReferenceException)
+            {
+                return StatusCode(500);
+            }
+            
+            students = data.Item1;
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(data.Item2));
+
+
+            return Ok(students);
         }
 
         [HttpGet("{id}", Name ="GetStudent")]
@@ -41,18 +60,33 @@ namespace StudentManagement.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<StudentDto> CreateStudent(StudentForCreationDto student)
+        public ActionResult<StudentDto> CreateStudent([ModelBinder(BinderType = typeof(NotEmptyListOfResponseModels))]StudentForCreationDto student)
         {
-            var data = _studentService.AddStudent(student);
+            StudentDto data;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+             
+            data = _studentService.AddStudent(student);
             return CreatedAtRoute("GetStudent", new { id = data.Id }, data);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateStudent(int id, StudentForUpdateDto student)
         {
-            _studentService.UpdateStudent(id, student);
+            try
+            {
+                _studentService.UpdateStudent(id, student);
 
-            return NoContent();
+            }
+            catch (NullReferenceException)
+            {
+
+                return StatusCode(404);
+            }
+
+            return Ok("Successfully updated!");
 
         }
 
@@ -75,7 +109,16 @@ namespace StudentManagement.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CourseDto>> GetCourses()
         {
-            var data = _studentService.GetCourses();
+            IEnumerable<CourseDto> data;
+            try
+            {
+                data = _studentService.GetCourses();
+            }
+            catch (NullReferenceException)
+            {
+
+                return StatusCode(500);
+            }
             return Ok(data);
         }
 
@@ -83,7 +126,16 @@ namespace StudentManagement.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<SectionDto>> GetSections()
         {
-            var data = _studentService.GetSections();
+            IEnumerable<SectionDto> data;
+            try
+            {
+                data = _studentService.GetSections();
+            }
+            catch (NullReferenceException)
+            {
+
+                return StatusCode(500);
+            }
             return Ok(data);
         }
     }

@@ -15,6 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace StudentManagement.API
 {
@@ -68,6 +71,15 @@ namespace StudentManagement.API
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
             app.UseSwaggerUI();
 
+            //app.UseExceptionHandler(a => a.Run(async context =>
+            //{
+            //    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+            //    var exception = exceptionHandlerPathFeature.Error;
+
+            //    var result = JsonConvert.SerializeObject(new { error = exception.Message });
+            //    context.Response.ContentType = "application/json";
+            //    await context.Response.WriteAsync(result);
+            //}));
             app.UseHttpsRedirection();
 
             app.UseRouting();

@@ -1,4 +1,4 @@
-﻿@model StudentManagement.WebApp.Models.Student
+﻿@model StudentManagement.WebApp.Models.StudentDetails
 
 @{
     ViewData["Title"] = "Student Detail Page";
@@ -17,7 +17,7 @@
             <a asp-action="Index" asp-controller="Home" role="button" class="btn btn-outline-danger">&lt;&lt; Back to home</a>
         </div>
         <div class="float-right">
-            <a asp-action="Edit" asp-route-id="@Model.Id" role="button" class="btn btn-outline-primary">Edit</a>
+            <a asp-action="Edit" asp-route-id="@Model.Student.Id" role="button" class="btn btn-outline-primary">Edit</a>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -26,35 +26,35 @@
             <tbody>
                 <tr>
                     <td>First Name</td>
-                    <td>@Model.Name.Split(" ")[0]</td>
+                    <td>@Model.Student.FirstName</td>
                 </tr>
                 <tr>
                     <td>Last Name</td>
-                    <td>@Model.Name.Split(" ")[1]</td>
+                    <td>@Model.Student.LastName</td>
                 </tr>
                 <tr>
                     <td>Gender</td>
-                    <td>@Model.Gender</td>
+                    <td>@Model.Student.Gender</td>
                 </tr>
                 <tr>
                     <td>Fees</td>
-                    <td>@Model.Fees</td>
+                    <td>@Model.Student.Fees</td>
                 </tr>
                 <tr>
                     <td>Age</td>
-                    <td>@Model.Age</td>
+                    <td>@Model.Student.Age</td>
                 </tr>
                 <tr>
                     <td>Course Name</td>
-                    <td>@Model.Course</td>
+                    <td>@Model.CourseName</td>
                 </tr>
                 <tr>
                     <td>Section Assigned</td>
-                    <td>@Model.Section</td>
+                    <td>@Model.SectionName</td>
                 </tr>
                 <tr>
                     <td>Date of Admission</td>
-                    <td>@Model.DateOfAdmission.ToString("dd/MM/yyyy")</td>
+                    <td>@Model.Student.DateOfAdmission.ToString("dd/MM/yyyy")</td>
                 </tr>
 
                 @*<tr>

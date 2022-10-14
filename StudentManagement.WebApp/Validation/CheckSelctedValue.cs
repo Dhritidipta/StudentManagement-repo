@@ -15,7 +15,7 @@ namespace StudentManagement.WebApp.Validation
             //try to convert the selected value to int.
             bool success = int.TryParse(value.ToString(), out number);
             //if the number is 0, it means user select the first item.
-            if (!success)
+            if (success)
             {
                 return true;
             }

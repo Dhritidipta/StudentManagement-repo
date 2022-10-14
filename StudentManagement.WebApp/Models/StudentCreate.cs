@@ -19,7 +19,7 @@ namespace StudentManagement.WebApp.Models
         [Required]
         [Display(Name ="Section")]
         [CheckSelctedValue(ErrorMessage = "Please select a valid category")]
-        public string Section { get; set; }
+        public int SectionId { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]
@@ -31,7 +31,7 @@ namespace StudentManagement.WebApp.Models
         [Required]
         [Display(Name = "Course Name")]
         [CheckSelctedValue(ErrorMessage = "Please select a valid category")]
-        public string Course { get; set; }
+        public int CourseId { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Admission")]

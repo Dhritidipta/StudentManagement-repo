@@ -1,4 +1,5 @@
 ﻿using StudentManagement.API.Entities;
+using StudentManagement.API.Helpers;
 using StudentManagement.API.Models;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace StudentManagement.API.Interfaces
 {
     public interface IStudentService
     {
-        IEnumerable<StudentDto> GetStudents();
-        StudentDto GetStudent(int Id);
+        (IEnumerable<StudentCSModel>, Metadata)  GetStudents(StudentParameters studentParameters);
+        IEnumerable<StudentCSModel> GetStudent(int Id);
         StudentDto AddStudent(StudentForCreationDto studentCreationDto);
         void UpdateStudent(int id, StudentForUpdateDto studentUpdateDto);
         void DeleteStudent(int id);

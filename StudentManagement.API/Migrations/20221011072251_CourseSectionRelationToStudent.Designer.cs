@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentManagement.API.DbContexts;
 
 namespace StudentManagement.API.Migrations
 {
     [DbContext(typeof(StudentMgmtContext))]
-    partial class StudentMgmtContextModelSnapshot : ModelSnapshot
+    [Migration("20221011072251_CourseSectionRelationToStudent")]
+    partial class CourseSectionRelationToStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,6 @@ namespace StudentManagement.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("CourseId")
-                        .HasColumnName("courseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfAdmission")
@@ -96,7 +97,6 @@ namespace StudentManagement.API.Migrations
                         .HasMaxLength(50);
 
                     b.Property<int?>("SectionId")
-                        .HasColumnName("sectionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -111,11 +111,11 @@ namespace StudentManagement.API.Migrations
             modelBuilder.Entity("StudentManagement.API.Entities.Student", b =>
                 {
                     b.HasOne("StudentManagement.API.Entities.Course", "Course")
-                        .WithMany("Student")
+                        .WithMany()
                         .HasForeignKey("CourseId");
 
                     b.HasOne("StudentManagement.API.Entities.Section", "Section")
-                        .WithMany("Student")
+                        .WithMany()
                         .HasForeignKey("SectionId");
                 });
 #pragma warning restore 612, 618

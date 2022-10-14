@@ -15,5 +15,7 @@ namespace StudentManagement.API.Entities
         public int CourseId { get; set; }
         [Column("courseName")]
         public string CourseName { get; set; }
+        public ICollection<Student> Student { get; set; }
+
     }
 }

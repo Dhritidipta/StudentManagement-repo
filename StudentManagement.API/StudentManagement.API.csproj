@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20220920181806_tweak.Designer.cs" />
     <Compile Remove="Migrations\20220921135252_ModifyCourseSection.cs" />
     <Compile Remove="Migrations\20220921135252_ModifyCourseSection.Designer.cs" />
+    <Compile Remove="Migrations\20221011072111_CourseSectionRelationToStudent.cs" />
+    <Compile Remove="Migrations\20221011072111_CourseSectionRelationToStudent.Designer.cs" />
+    <Compile Remove="Migrations\20221011083415_UpdatingCourseAndSection.cs" />
+    <Compile Remove="Migrations\20221011083415_UpdatingCourseAndSection.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,6 @@
 ﻿using StudentManagement.API.Entities;
+using StudentManagement.API.Helpers;
+using StudentManagement.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,10 @@ namespace StudentManagement.API.Interfaces
 {
     public interface IStudentRepository
     {
-        IEnumerable<Student> GetStudents();
-        Student GetStudent(int Id);
+        PagedList<StudentCSModel> GetStudents(StudentParameters studentParameters);
+        IEnumerable<StudentCSModel> GetStudent(int Id);
         void AddStudent(Student student);
-        void UpdateStudent(Student student);
+        void UpdateStudent(int id, Student student);
         void DeleteStudent(Student student);
         IEnumerable<Course> GetCourses();
         IEnumerable<Section> GetSections();

@@ -8,21 +8,23 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentManagement.WebApp.Helpers;
+using Microsoft.Extensions.Configuration;
 
 namespace StudentManagement.WebApp.Controllers
 {
     public class StudentController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-        private readonly string BaseUrl = "https://localhost:5001/api/";
+        private readonly IConfiguration _config;
+        private readonly string BaseUrl;
+        public StudentController(IConfiguration config)
+        {
+            BaseUrl = config["BaseUrl"];
+        }
 
-        public IActionResult Details(int id)
+    public IActionResult Details(int id)
         {
 
-            Student student = null;
+            IEnumerable<StudentDetails> students = new List<StudentDetails>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUrl);
@@ -30,12 +32,11 @@ namespace StudentManagement.WebApp.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    student = JsonConvert.DeserializeObject<Student>(response.Content.ReadAsStringAsync().Result);
+                    students = JsonConvert.DeserializeObject<IList<StudentDetails>>(response.Content.ReadAsStringAsync().Result);
                 }
             }
 
-
-            return View(student);
+            return View(students.SingleOrDefault());
         }
 
         public IActionResult Create()
@@ -49,27 +50,27 @@ namespace StudentManagement.WebApp.Controllers
             //    courseList.Add(new SelectListItem { Value = item.CourseName , Text = item.CourseName });
             //}
 
-            var sections = GetDetailsUtility.GetSectionsList(); ;
+            //var sections = GetDetailsUtility.GetSectionsList(); ;
 
-            List<SelectListItem> sectionList = new List<SelectListItem>();
-            foreach (var item in sections)
-            {
+            //List<SelectListItem> sectionList = new List<SelectListItem>();
+            //foreach (var item in sections)
+            //{
 
-                sectionList.Add(new SelectListItem { Value = item.SectionName, Text = item.SectionName });
-            }
+            //    sectionList.Add(new SelectListItem { Value = item.SectionName, Text = item.SectionName });
+            //}
 
             //assigning SelectListItem to view Bag
             //ViewBag.courses = courseList;
-            ViewBag.sections = sectionList;
+            //ViewBag.sections = sectionList;
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(StudentCreate student)
         {
-
             if (ModelState.IsValid)
             {
+
                 using var client = new HttpClient();
                 client.BaseAddress = new Uri(BaseUrl);
 
@@ -84,13 +85,12 @@ namespace StudentManagement.WebApp.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-
             return View(student);
         }
 
         public ViewResult Edit(int id)
-        { 
-            Student student = null;
+        {
+            IEnumerable<StudentDetails> students = new List<StudentDetails>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUrl);
@@ -98,12 +98,12 @@ namespace StudentManagement.WebApp.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    student = JsonConvert.DeserializeObject<Student>(response.Content.ReadAsStringAsync().Result);
+                    students = JsonConvert.DeserializeObject<IList<StudentDetails>>(response.Content.ReadAsStringAsync().Result);
                 }
             }
 
             ViewBag.id = id;
-            ViewBag.student = student;
+            ViewBag.student = students.SingleOrDefault();
             return View();
         }
 

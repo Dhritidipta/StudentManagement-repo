@@ -11,9 +11,10 @@ function myfunc() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (res) {
+            var i = 1;
             $.each(res, function (data, value) {
-                console.log(value.CourseName);
-                $("#coursesDropDown").append($("<option></option>").val(value.CourseName).html(value.CourseName));
+                
+                $("#coursesDropDown").append($("<option></option>").val(i++).html(value.CourseName));
             })
         },
         error: function () {
@@ -27,9 +28,9 @@ function myfunc() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (res) {
+            var i = 1;
             $.each(res, function (data, value) {
-                console.log(value.SectionName);
-                $("#sectionsDropDown").append($("<option></option>").val(value.SectionName).html(value.SectionName));
+                $("#sectionsDropDown").append($("<option></option>").val(i++).html(value.SectionName));
             })
         },
         error: function () {

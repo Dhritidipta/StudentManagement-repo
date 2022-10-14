@@ -14,7 +14,7 @@
     <form asp-action="Create" method="post" role="form" class="labels-bold">
       @*  <div asp-validation-summary="All" class="text-danger"></div>*@
         <div class="row mb-3">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <label asp-for="FirstName" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
                 <input asp-for="FirstName" class="form-control" />
             </div>
@@ -22,7 +22,7 @@
 
         </div>
         <div class="row mb-3">
-            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <label asp-for="LastName" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
                 <input asp-for="LastName" class="form-control" />
             </div>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="row mb-3">
-            <label asp-for="Gender" class="col-md-2 control-label"></label>
+            <label asp-for="Gender" class="col-md-2 control-label required"></label>
 
             <div class="btn-group col-md-5 radio-toggle" role="group" aria-label="Basic radio toggle button group">
                 <input asp-for="Gender" value="Male" type="radio" class="btn-check" id="btnradio1" autocomplete="off" checked>
@@ -43,14 +43,14 @@
             <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
         <div class="row mb-3">
-            <label asp-for="Fees" class="col-md-2 control-label"></label>
+            <label asp-for="Fees" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
                 <input asp-for="Fees" class="form-control" />
             </div>
             <span asp-validation-for="Fees" class="text-danger"></span>
         </div>
         <div class="row mb-3">
-            <label asp-for="Age" class="col-md-2 control-label"></label>
+            <label asp-for="Age" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
                 <input asp-for="Age" class="form-control" />
             </div>
@@ -58,27 +58,27 @@
 
         </div>
         <div class="row mb-3">
-            <label asp-for="Course" class="col-md-2 control-label"></label>
+            <label asp-for="CourseId" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <select id="coursesDropDown" asp-for="Course" class="form-control">
-                    <option value="0">--Select Course--</option>
+                <select id="coursesDropDown" asp-for="CourseId" class="form-control">
+                    <option value="">--Select Course--</option>
                 </select>
             </div>
-            <span asp-validation-for="Course" class="text-danger"></span>
+            <span asp-validation-for="CourseId" class="text-danger"></span>
         </div>
         <div class="row mb-3">
-            <label asp-for="Section" class="col-md-2 control-label"></label>
+            <label asp-for="SectionId" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
-                <select id="sectionsDropDown" asp-for="Section" class="form-control">
-                    <option value="0">--Select Section--</option>
+                <select id="sectionsDropDown" asp-for="SectionId" class="form-control">
+                    <option value="">--Select Section--</option>
 
                 </select>
             </div>
-            <span asp-validation-for="Section" class="text-danger"></span>
+            <span asp-validation-for="SectionId" class="text-danger"></span>
         </div>
 
         <div class="row mb-3">
-            <label asp-for="DateOfAdmission" class="col-md-2 control-label"></label>
+            <label asp-for="DateOfAdmission" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
                 <input asp-for="DateOfAdmission" class="form-control" />
             </div>

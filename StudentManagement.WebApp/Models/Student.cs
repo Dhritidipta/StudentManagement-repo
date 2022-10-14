@@ -9,13 +9,13 @@ namespace StudentManagement.WebApp.Models
     public class Student
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Section { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int SectionId { get; set; }
         public string Gender { get; set; }
         public int Fees { get; set; }
         public int Age { get; set; }
-        public string Course { get; set; }
-
+        public int CourseId { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateOfAdmission { get; set; }
     }

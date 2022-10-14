@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StudentManagement.API.Helpers;
+using StudentManagement.API.Models;
 
 namespace StudentManagement.API.Repositories
 {
@@ -48,17 +50,50 @@ namespace StudentManagement.API.Repositories
             return _context.Section.ToList<Section>();
         }
 
-        public Student GetStudent(int Id)
+        public IEnumerable<StudentCSModel> GetStudent(int Id)
         {
-            //return _context.Student.FirstOrDefault(a => a.Id == Id);
-
+            var student = from s in _context.Student join c in _context.Course on s.CourseId equals c.CourseId join sec in _context.Section on s.SectionId equals sec.SectionId where s.Id == Id select new StudentCSModel { Student = s, CourseName = c.CourseName, SectionName = sec.SectionName };
             //using stored procedure instead of Linq
-            return _context.Student.FromSqlRaw<Student>("spGetStudentById {0}", Id).ToList().FirstOrDefault();
+            //var student = _context.Student.FromSqlRaw<Student>("spGetStudentById {0}", Id).ToList().FirstOrDefault();
+
+            return student;
         }
 
-        public IEnumerable<Student> GetStudents()
+        public PagedList<StudentCSModel> GetStudents(StudentParameters studentParameters)
         {
-            return _context.Student.ToList<Student>();
+            var students = from s in _context.Student join c in _context.Course on s.CourseId equals c.CourseId join sec in _context.Section on s.SectionId equals sec.SectionId select new StudentCSModel { Student = s, CourseName= c.CourseName,SectionName= sec.SectionName };
+
+            if (!String.IsNullOrEmpty(studentParameters.SearchName))
+            {
+                students = students.Where(s => s.Student.FirstName.Contains(studentParameters.SearchName)
+                || s.Student.LastName.Contains(studentParameters.SearchName));
+            }
+
+            switch (studentParameters.OrderBy)
+            {
+                
+                case "Name_asc":
+                    students = students.OrderBy(s => s.Student.FirstName).ThenBy(s => s.Student.LastName);
+                    break;
+                case "Name_desc":
+                    students = students.OrderByDescending(s => s.Student.FirstName).ThenByDescending(s => s.Student.LastName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.Student.DateOfAdmission);
+                    break;
+                case "Date_desc":
+                    students = students.OrderByDescending(s => s.Student.DateOfAdmission);
+                    break;
+                default:
+                    students = students.OrderByDescending(s => s.Student.Id);
+                    break;
+
+            }
+
+            return PagedList<StudentCSModel>.ToPagedList(students,
+                studentParameters.PageNumber,
+                studentParameters.PageSize);
+
         }
 
         public bool Save()
@@ -66,9 +101,34 @@ namespace StudentManagement.API.Repositories
             return (_context.SaveChanges() >= 0);
         }
 
-        public void UpdateStudent(Student student)
+        public void UpdateStudent(int id, Student student)
         {
+            if(_context.Student.Where(s => s.Id == id).AsNoTracking().FirstOrDefault() == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            _context.Entry(student).State = EntityState.Modified;
+            _context.SaveChangesAsync();
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!TodoItemExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+
+            //return NoContent();
             //Dto mapping
         }
+
     }
 }

@@ -16,5 +16,6 @@ namespace StudentManagement.API.Entities
 
         [Column("sectionName", TypeName = "char(1)")]
         public string SectionName { get; set; }
+        public ICollection<Student> Student { get; set; }
     }
 }
