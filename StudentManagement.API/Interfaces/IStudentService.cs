@@ -17,6 +17,7 @@ namespace StudentManagement.API.Interfaces
         void DeleteStudent(int id);
         IEnumerable<CourseDto> GetCourses();
         IEnumerable<SectionDto> GetSections();
+        CredentialsDto LoginUser(string username, string password);
     }
 }
 

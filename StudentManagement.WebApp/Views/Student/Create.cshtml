@@ -12,7 +12,7 @@
 </div>
 <div class="m-auto" id="wrap-form">
     <form asp-action="Create" method="post" role="form" class="labels-bold">
-      @*  <div asp-validation-summary="All" class="text-danger"></div>*@
+        @*  <div asp-validation-summary="All" class="text-danger"></div>*@
         <div class="row mb-3">
             <label asp-for="FirstName" class="col-md-2 control-label required"></label>
             <div class="col-md-5">
@@ -96,4 +96,9 @@
     </form>
 </div>
 
+<script>
+    var token = '@ViewBag.token';
+    var courseValue = -1;
+    var sectionValue = -1;
+</script>
 <script src="~/js/site.js" asp-append-version="true"></script>

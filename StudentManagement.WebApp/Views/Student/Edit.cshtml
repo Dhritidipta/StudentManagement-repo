@@ -95,7 +95,13 @@
     </form>
 </div>
 
+<script>
+    var token = '@ViewBag.token';
+    var courseValue = @ViewBag.student.Student.CourseId;
+    var sectionValue = '@ViewBag.student.Student.SectionId';
+</script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+
 
 <script type="text/javascript">
     window.addEventListener('load', myfunc, false);
@@ -108,15 +114,13 @@
             document.getElementById("radio-female").setAttribute("checked", "true");
         }
 
-        SelectElm = document.getElementById("coursesDropDown");
-        SelectElm.value = "@ViewBag.student.Student.CourseId";
-        SelectElm = document.getElementById("sectionsDropDown");
-        SelectElm.value = '@ViewBag.student.Student.SectionId';
+        //SelectElm = document.getElementById("coursesDropDown");
+        //SelectElm.value = "";
+        //SelectElm = document.getElementById("sectionsDropDown");
+        //SelectElm.value = ;
 
 
 
     };
-
-
 
 </script>

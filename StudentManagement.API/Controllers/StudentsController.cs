@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using StudentManagement.API.Entities;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagement.API.Controllers
 {
+    [Authorize]
     [Route("api/students")]
     [ApiController]
     public class StudentsController : ControllerBase

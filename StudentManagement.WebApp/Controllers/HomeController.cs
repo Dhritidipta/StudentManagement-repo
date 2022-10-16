@@ -13,9 +13,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
+using System.Net.Http.Headers;
 
 namespace StudentManagement.WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IConfiguration _config;
@@ -26,6 +29,7 @@ namespace StudentManagement.WebApp.Controllers
 
         public IActionResult Index(string orderBy, string currentFilter, string searchName, int? pageNum)
         {
+            var accessToken = HttpContext.Session.GetString("Token");
             ViewData["CurrentSort"] = orderBy;
             ViewData["NameSortParam"] = orderBy == "Name_asc" ? "Name_desc" : "Name_asc";
             ViewData["DateSortParam"] = orderBy == "Date" ? "Date_desc" : "Date";
@@ -48,6 +52,7 @@ namespace StudentManagement.WebApp.Controllers
 
             using(var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 client.BaseAddress = new Uri(_config["BaseUrl"]);
                 var response = client.GetAsync($"students?PageNumber={pageNumber}&PageSize={pageSize}&OrderBy={orderBy}&SearchName={searchName}").Result;
                 responseHeaderPagerData = JsonConvert.DeserializeObject<Metadata>(response.Headers.GetValues("X-Pagination").FirstOrDefault());

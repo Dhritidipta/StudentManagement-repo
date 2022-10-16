@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +25,23 @@ namespace StudentManagement.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+          .AddCookie(o =>
+          {
+              o.LoginPath = "/Login/LoginUser";
+          });
             services.AddHttpClient();
+            services.AddDistributedMemoryCache();
+            services.AddSession(x =>
+            {
+                x.Cookie.Name = "StudentMgmt.Session";
+                x.IdleTimeout = TimeSpan.FromMinutes(10);
+                x.Cookie.HttpOnly = true;
+                x.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddRazorPages();
         }
 
@@ -43,16 +60,16 @@ namespace StudentManagement.WebApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

@@ -9,12 +9,16 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentManagement.WebApp.Helpers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
 
 namespace StudentManagement.WebApp.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
-        private readonly IConfiguration _config;
+
         private readonly string BaseUrl;
         public StudentController(IConfiguration config)
         {
@@ -23,10 +27,12 @@ namespace StudentManagement.WebApp.Controllers
 
     public IActionResult Details(int id)
         {
-
+            var accessToken = HttpContext.Session.GetString("Token");
             IEnumerable<StudentDetails> students = new List<StudentDetails>();
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
                 client.BaseAddress = new Uri(BaseUrl);
                 var response = client.GetAsync($"students/{id}").Result;
 
@@ -62,16 +68,19 @@ namespace StudentManagement.WebApp.Controllers
             //assigning SelectListItem to view Bag
             //ViewBag.courses = courseList;
             //ViewBag.sections = sectionList;
+            ViewBag.token = HttpContext.Session.GetString("Token");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(StudentCreate student)
         {
+            var accessToken = HttpContext.Session.GetString("Token");
             if (ModelState.IsValid)
             {
 
                 using var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 client.BaseAddress = new Uri(BaseUrl);
 
                 var stringContent = new StringContent(JsonConvert.SerializeObject(student), System.Text.Encoding.UTF8, "application/json");
@@ -90,9 +99,11 @@ namespace StudentManagement.WebApp.Controllers
 
         public ViewResult Edit(int id)
         {
+            var accessToken = HttpContext.Session.GetString("Token");
             IEnumerable<StudentDetails> students = new List<StudentDetails>();
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 client.BaseAddress = new Uri(BaseUrl);
                 var response = client.GetAsync($"students/{id}").Result;
 
@@ -104,14 +115,17 @@ namespace StudentManagement.WebApp.Controllers
 
             ViewBag.id = id;
             ViewBag.student = students.SingleOrDefault();
+            ViewBag.token = accessToken;
             return View();
         }
 
         [HttpPost]
         public IActionResult Edit(StudentUpdate student, int id)
         {
+            var accessToken = HttpContext.Session.GetString("Token");
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 client.BaseAddress = new Uri(BaseUrl);
                 var stringContent = new StringContent(JsonConvert.SerializeObject(student), System.Text.Encoding.UTF8, "application/json");
                 var putTask = client.PutAsync($"students/{id}", stringContent);
@@ -132,8 +146,10 @@ namespace StudentManagement.WebApp.Controllers
 
         public IActionResult Delete(int id)
         {
+            var accessToken = HttpContext.Session.GetString("Token");
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 client.BaseAddress = new Uri(BaseUrl);
                 var deleteTask = client.DeleteAsync($"students/{id}");
                 deleteTask.Wait();

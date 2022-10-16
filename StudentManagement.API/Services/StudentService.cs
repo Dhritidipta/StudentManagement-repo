@@ -94,6 +94,12 @@ namespace StudentManagement.API.Services
             return (studentsFromDAL, metadata);
         }
 
+        public CredentialsDto LoginUser(string username, string password)
+        {
+            var userFromDAL = _studentRepo.LoginUser(username, password);
+            return _mapper.Map<CredentialsDto>(userFromDAL);
+        }
+
         public void UpdateStudent(int id, StudentForUpdateDto studentUpdateDto)
         {
             //var studentFromRepo = _studentRepo.GetStudent(id).SingleOrDefault();

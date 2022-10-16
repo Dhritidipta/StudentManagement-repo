@@ -16,5 +16,6 @@ namespace StudentManagement.API.DbContexts
         public DbSet<Student> Student { get; set; }
         public DbSet<Course> Course { get; set; }
         public DbSet<Section> Section { get; set; }
+        public DbSet<Credentials> Credentials { get; set; }
     }
 }

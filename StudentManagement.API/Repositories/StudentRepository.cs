@@ -130,5 +130,14 @@ namespace StudentManagement.API.Repositories
             //Dto mapping
         }
 
+        public Credentials LoginUser(string email, string pass)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
+            {
+                return null;
+            }
+            return _context.Credentials.FirstOrDefault(u => u.Username == email && u.Password == pass);
+        }
+
     }
 }

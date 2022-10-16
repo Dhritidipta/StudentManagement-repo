@@ -23,7 +23,6 @@ namespace StudentManagement.API.Entities
         [Column("lastName")]
         [StringLength(50)]
         public string LastName { get; set; }
-
         [Column("sectionId")]
         public int? SectionId { get; set; }
         public Section Section { get; set; }

@@ -18,5 +18,6 @@ namespace StudentManagement.API.Interfaces
         IEnumerable<Course> GetCourses();
         IEnumerable<Section> GetSections();
         bool Save();
+        Credentials LoginUser(string username, string password); 
     }
 }

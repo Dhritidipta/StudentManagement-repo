@@ -18,6 +18,7 @@ namespace StudentManagement.API.Profiles
             CreateMap<StudentForUpdateDto, Student>();
             CreateMap<Course, CourseDto>();
             CreateMap<Section, SectionDto>();
+            CreateMap<Credentials, CredentialsDto>();
         }
     }
 }

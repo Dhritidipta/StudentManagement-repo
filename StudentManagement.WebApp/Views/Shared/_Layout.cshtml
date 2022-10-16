@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using System.IdentityModel.Tokens.Jwt;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,7 +20,20 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                @{
+                    var token = @Context.Session.GetString("Token");
+                    var handler = new JwtSecurityTokenHandler();
+
+                    var name = handler.ReadJwtToken(token);
+                    var getName = name.Claims.FirstOrDefault(c => c.Type == "Username")?.Value;
+                }
+
+                    <h5 class="mr-3">Hello, @getName</h5>
             </div>
+
+            <form asp-controller="Login" asp-action="Logout" method="post">
+                <button class="btn btn-outline-danger">Logout</button>
+            </form>
         </nav>
     </header>
     <div class="container">
